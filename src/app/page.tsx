@@ -88,7 +88,7 @@ export default function Home() {
       {/* Footer */}
       <footer style={{ background: '#111', padding: '40px 24px', textAlign: 'center' }}>
         <p style={{ fontSize: '13px', color: '#888' }}>
-          Built as a concept by <span style={{ color: '#fff', fontWeight: 700 }}>[Your Name]</span> — frontend intern candidate
+          Built as a concept by <span style={{ color: '#fff', fontWeight: 700 }}>[Alicia Wibawa]</span>
         </p>
         <p style={{ fontSize: '12px', color: '#555', marginTop: '8px' }}>
           Not affiliated with Fetch. Always confirm coverage directly with Fetch before making decisions.
