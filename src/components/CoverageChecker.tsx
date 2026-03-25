@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react';
-import { CoverageRequest, CoverageResult, PetType } from '@/types/coverage';
-import ResultCard from './ResultCard';
+import { useState } from 'react'
+import { CoverageRequest, CoverageResult, PetType } from '@/types/coverage'
+import ResultCard from './ResultCard'
 
 export default function CoverageChecker() {
   const [form, setForm] = useState<CoverageRequest>({
@@ -19,7 +19,6 @@ export default function CoverageChecker() {
     setLoading(true)
     setError(null)
     setResult(null)
-
     try {
       const res = await fetch('/api/coverage', {
         method: 'POST',
@@ -29,7 +28,7 @@ export default function CoverageChecker() {
       const data = await res.json()
       if (!res.ok) throw new Error(data.error)
       setResult(data)
-    } catch (err) {
+    } catch {
       setError('Something went wrong. Please try again.')
     } finally {
       setLoading(false)
@@ -37,76 +36,60 @@ export default function CoverageChecker() {
   }
 
   return (
-    <div className="w-full max-w-2xl mx-auto">
-      {/* Form Card */}
-      <div className="bg-white rounded-3xl shadow-xl p-8 mb-6">
-        
-        {/* Pet Type Toggle */}
-        <div className="mb-6">
-          <label className="block text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
-            My pet is a
+    <div style={{ width: '100%' }}>
+      <div style={{ background: '#fff', borderRadius: '24px', padding: '32px', border: '2px solid #111', marginBottom: '20px' }}>
+
+        {/* Pet type */}
+        <div style={{ marginBottom: '24px' }}>
+          <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, color: '#888', letterSpacing: '0.12em', marginBottom: '10px' }}>
+            MY PET IS A
           </label>
-          <div className="flex gap-3">
+          <div style={{ display: 'flex', gap: '10px' }}>
             {(['dog', 'cat'] as PetType[]).map((type) => (
-              <button
-                key={type}
-                onClick={() => setForm({ ...form, petType: type })}
-                className={`flex-1 py-3 px-4 rounded-2xl border-2 font-semibold text-lg transition-all ${
-                  form.petType === type
-                    ? 'border-teal-500 bg-teal-50 text-teal-700'
-                    : 'border-gray-200 text-gray-400 hover:border-gray-300'
-                }`}
-              >
+              <button key={type} onClick={() => setForm({ ...form, petType: type })}
+                style={{ flex: 1, padding: '12px', borderRadius: '12px', border: `2px solid ${form.petType === type ? '#111' : '#e5e7eb'}`, background: form.petType === type ? '#f9a8d4' : '#fff', fontWeight: 700, fontSize: '15px', cursor: 'pointer', color: '#111', transition: 'all 0.15s' }}>
                 {type === 'dog' ? '🐶 Dog' : '🐱 Cat'}
               </button>
             ))}
           </div>
         </div>
 
-        {/* Pet Name */}
-        <div className="mb-6">
-          <label className="block text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
-            Pet's name
+        {/* Pet name */}
+        <div style={{ marginBottom: '24px' }}>
+          <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, color: '#888', letterSpacing: '0.12em', marginBottom: '10px' }}>
+            PET'S NAME
           </label>
-          <input
-            type="text"
-            placeholder="e.g. Biscuit"
-            value={form.petName}
+          <input type="text" placeholder="e.g. Biscuit" value={form.petName}
             onChange={(e) => setForm({ ...form, petName: e.target.value })}
-            className="w-full px-4 py-3 rounded-2xl border-2 border-gray-200 focus:border-teal-500 focus:outline-none text-gray-800 text-lg transition-colors"
+            style={{ width: '100%', padding: '14px', borderRadius: '12px', border: '2px solid #e5e7eb', fontSize: '15px', color: '#111', outline: 'none', boxSizing: 'border-box' }}
+            onFocus={e => e.target.style.borderColor = '#111'}
+            onBlur={e => e.target.style.borderColor = '#e5e7eb'}
           />
         </div>
 
         {/* Condition */}
-        <div className="mb-6">
-          <label className="block text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
-            What happened or what condition?
+        <div style={{ marginBottom: '24px' }}>
+          <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, color: '#888', letterSpacing: '0.12em', marginBottom: '10px' }}>
+            WHAT HAPPENED OR WHAT CONDITION?
           </label>
-          <textarea
-            placeholder="e.g. My dog ate something and needs surgery, my cat has a skin infection, cruciate ligament tear..."
-            value={form.condition}
+          <textarea placeholder="e.g. My dog ate something and needs surgery..." value={form.condition}
             onChange={(e) => setForm({ ...form, condition: e.target.value })}
             rows={3}
-            className="w-full px-4 py-3 rounded-2xl border-2 border-gray-200 focus:border-teal-500 focus:outline-none text-gray-800 text-lg transition-colors resize-none"
+            style={{ width: '100%', padding: '14px', borderRadius: '12px', border: '2px solid #e5e7eb', fontSize: '15px', color: '#111', outline: 'none', resize: 'none', boxSizing: 'border-box' }}
+            onFocus={e => e.target.style.borderColor = '#111'}
+            onBlur={e => e.target.style.borderColor = '#e5e7eb'}
           />
         </div>
 
-        {/* Coverage Percentage */}
-        <div className="mb-8">
-          <label className="block text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
-            Your coverage percentage
+        {/* Coverage % */}
+        <div style={{ marginBottom: '28px' }}>
+          <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, color: '#888', letterSpacing: '0.12em', marginBottom: '10px' }}>
+            YOUR COVERAGE PERCENTAGE
           </label>
-          <div className="flex gap-3">
+          <div style={{ display: 'flex', gap: '8px' }}>
             {([60, 70, 80, 90] as const).map((pct) => (
-              <button
-                key={pct}
-                onClick={() => setForm({ ...form, coveragePercentage: pct })}
-                className={`flex-1 py-3 rounded-2xl border-2 font-bold text-lg transition-all ${
-                  form.coveragePercentage === pct
-                    ? 'border-teal-500 bg-teal-50 text-teal-700'
-                    : 'border-gray-200 text-gray-400 hover:border-gray-300'
-                }`}
-              >
+              <button key={pct} onClick={() => setForm({ ...form, coveragePercentage: pct })}
+                style={{ flex: 1, padding: '12px 0', borderRadius: '12px', border: `2px solid ${form.coveragePercentage === pct ? '#111' : '#e5e7eb'}`, background: form.coveragePercentage === pct ? '#f9a8d4' : '#fff', fontWeight: 700, fontSize: '15px', cursor: 'pointer', color: '#111', transition: 'all 0.15s' }}>
                 {pct}%
               </button>
             ))}
@@ -114,20 +97,14 @@ export default function CoverageChecker() {
         </div>
 
         {/* Submit */}
-        <button
-          onClick={handleSubmit}
-          disabled={loading || !form.petName || !form.condition}
-          className="w-full py-4 bg-teal-500 hover:bg-teal-600 disabled:bg-gray-200 disabled:text-gray-400 text-white font-bold text-lg rounded-2xl transition-all"
-        >
-          {loading ? 'Checking coverage...' : 'Check my coverage →'}
+        <button onClick={handleSubmit} disabled={loading || !form.petName || !form.condition}
+          style={{ width: '100%', padding: '16px', background: '#c7d0f8', color: '#111', borderRadius: '12px', border: '2px solid #111', fontWeight: 700, fontSize: '16px', cursor: loading || !form.petName || !form.condition ? 'not-allowed' : 'pointer', transition: 'all 0.15s', opacity: loading || !form.petName || !form.condition ? 0.6 : 1 }}>
+          {loading ? 'Checking coverage...' : 'Check my coverage 🔍'}
         </button>
 
-        {error && (
-          <p className="mt-4 text-center text-red-500 text-sm">{error}</p>
-        )}
+        {error && <p style={{ marginTop: '14px', textAlign: 'center', color: '#ef4444', fontSize: '14px' }}>{error}</p>}
       </div>
 
-      {/* Result */}
       {result && <ResultCard result={result} petName={form.petName} />}
     </div>
   )
