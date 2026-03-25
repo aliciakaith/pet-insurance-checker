@@ -5,7 +5,7 @@ export default function Home() {
     <main style={{ background: '#fff', minHeight: '100vh' }}>
 
       {/* Nav */}
-      <nav style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '30px 50px', background: '#fff' }}>
+      <nav style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', margin: '0 auto 32px',  paddingTop: '20px' ,maxWidth: '1420px', background: '#fff' }}>
         <a href="https://fetchpet.com.au" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
           <img src="/fetch-pet-insurance_1.png" alt="Fetch" style={{ height: '40px' }} />
         </a>
@@ -16,7 +16,7 @@ export default function Home() {
       </nav>
 
       {/* Hero + Tool */}
-      <section style={{ background: '#c7d0f8', borderRadius: '32px', margin: '0 50px 32px', padding: '48px 24px 48px' }}>
+      <section style={{ background: '#c7d0f8', borderRadius: '32px', margin: '0 auto 32px', padding: '48px 24px 48px', maxWidth: '1420px' }}>
         <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto 36px' }}>
           <div style={{ display: 'inline-block', background: '#f9a8d4', border: '2px solid #111', borderRadius: '999px', padding: '8px 20px', fontSize: '14px', fontWeight: 700, color: '#111', marginBottom: '24px' }}>
             Built for Fetch Australia Customers ❤️
@@ -62,7 +62,7 @@ export default function Home() {
       </section>
 
       {/* Common questions */}
-      <section style={{ background: '#f9c8f0', borderRadius: '32px', margin: '0 50px 32px', padding: '60px 40px' }}>
+      <section style={{ background: '#f9c8f0', borderRadius: '32px', margin: '0 auto 32px', padding: '48px 24px 48px', maxWidth: '1420px' }}>
         <h2 style={{ fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 700, textAlign: 'center', color: '#111', marginBottom: '40px', letterSpacing: '-1px' }}>
           Common questions it can answer
         </h2>
